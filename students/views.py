@@ -1,20 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponce
+from django.http import HttpResponse
 
+def about(request):
+    return render(request, 'students/about.html')
 
-def example_view(request):
-    return render(request, 'app/example.html')
-
-
-def show_data(request):
-    if request.method == 'GET':
-        return render(request, 'app/show_data.html')
-
-
-def submit_data(request):
+def contact(request):
     if request.method == 'POST':
-        return HttpResponce('Данные отправлены')
+        name = request.POST.get('name')
+        message = request.POST.get('message')
 
+        return HttpResponse(f'Спасибо, {name}! Сообщение получено.')
 
-def show_item(request, item_id):
-    return render(request, 'app/item.html', {'item_id', item_id})
+    return render(request, 'students/contact.html')
